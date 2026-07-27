@@ -73,6 +73,7 @@ public class Trie_DS {
       }
       return true;
   }
+  // CountBode --->
   public static int countNode(Node root){
       if(root == null){
           return 0;
@@ -85,22 +86,39 @@ public class Trie_DS {
       }
       return count +1;
   }
+  public static String ans = "";
+  public static void longestWord(Node root, StringBuilder temp){
+      if(root == null){
+          return;
+      }
+      for(int i = 0;i<26;i++){
+          if(root.children[i] != null && root.children[i].eow == true){
+              temp.append((char)(i+'a'));
+              if(temp.length() > ans.length()){
+                  ans = temp.toString();
+              }
+              longestWord(root.children[i],temp);
+              temp.deleteCharAt(temp.length()-1);
+          }
+      }
+  }
+
   public static void main(String[] args) {
 
-//        String words[] = {"the","a","there","their","any"};
-//        for(int i = 0;i<words.length;i++){
-//            insert(words[i]);
-//        }
-//        System.out.println("Words inserted successfully.");
-//         System.out.println(search("there"));
-//         System.out.println(search("thor"));
-//         System.out.println(search("an"));
-//
-//         String key = "theathere";
-//         System.out.println(wordBrake(key));
-//
-//         String prefix = "sr";
-//         System.out.println(startWith(prefix));
+        String words[] = {"the","a","there","their","any"};
+        for(int i = 0;i<words.length;i++){
+            insert(words[i]);
+        }
+        System.out.println("Words inserted successfully.");
+         System.out.println(search("there"));
+         System.out.println(search("thor"));
+         System.out.println(search("an"));
+
+         String key = "theathere";
+         System.out.println(wordBrake(key));
+
+         String prefix = "sr";
+         System.out.println(startWith(prefix));
 
          String str = "apple";
          for(int i = 0;i<str.length();i++){
@@ -108,6 +126,11 @@ public class Trie_DS {
              insert(suffix);
          }
           System.out.println(countNode(root));
+
+         longestWord(root,new StringBuilder(str=""));
+          System.out.println(ans);
+
+
   }
 
 }
