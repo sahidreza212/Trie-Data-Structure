@@ -61,6 +61,18 @@ public class Trie_DS {
       }
       return false;
   }
+
+  public static boolean startWith (String prefix){
+      Node curr = root;
+      for(int i = 0;i<prefix.length();i++){
+          int idx =prefix.charAt(i)-'a';
+          if(curr.children[idx] == null){
+              return false;
+          }
+          curr = curr.children[idx];
+      }
+      return true;
+  }
   public static void main(String[] args) {
 
         String words[] = {"the","a","there","their","any"};
@@ -75,6 +87,8 @@ public class Trie_DS {
          String key = "theathere";
          System.out.println(wordBrake(key));
 
+         String prefix = "sr";
+         System.out.println(startWith(prefix));
   }
 
 }
