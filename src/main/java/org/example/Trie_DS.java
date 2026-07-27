@@ -13,6 +13,8 @@ public class Trie_DS {
             eow = false;
         }
     }
+
+    // Insert ---->
     public static Node root = new Node();
   public static void insert(String word){
       Node curr = root;
@@ -28,6 +30,8 @@ public class Trie_DS {
           curr = curr.children[idx];
       }
   }
+
+  // Search --->
   public static boolean search(String key){
       Node curr = root;
       for(int i = 0;i<key.length();i++){
@@ -43,7 +47,21 @@ public class Trie_DS {
       }
       return true;
   }
-     public static void main(String[] args) {
+// WordBrake --->
+  public static boolean wordBrake(String key){
+      if(key.length() == 0){
+          return true;
+      }
+      for (int i = 1;i<= key.length();i++){
+          String firstPart = key.substring(0,i);
+          String secPart = key.substring(i);
+          if(search(firstPart) && wordBrake(secPart)){
+              return  true;
+          }
+      }
+      return false;
+  }
+  public static void main(String[] args) {
 
         String words[] = {"the","a","there","their","any"};
         for(int i = 0;i<words.length;i++){
@@ -54,5 +72,9 @@ public class Trie_DS {
          System.out.println(search("thor"));
          System.out.println(search("an"));
 
-    }
+         String key = "theathere";
+         System.out.println(wordBrake(key));
+
+  }
+
 }
