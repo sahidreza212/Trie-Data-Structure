@@ -73,22 +73,41 @@ public class Trie_DS {
       }
       return true;
   }
+  public static int countNode(Node root){
+      if(root == null){
+          return 0;
+      }
+      int count = 0;
+      for(int i = 0;i<26;i++){
+          if(root.children[i] != null){
+              count += countNode(root.children[i]);
+          }
+      }
+      return count +1;
+  }
   public static void main(String[] args) {
 
-        String words[] = {"the","a","there","their","any"};
-        for(int i = 0;i<words.length;i++){
-            insert(words[i]);
-        }
-        System.out.println("Words inserted successfully.");
-         System.out.println(search("there"));
-         System.out.println(search("thor"));
-         System.out.println(search("an"));
+//        String words[] = {"the","a","there","their","any"};
+//        for(int i = 0;i<words.length;i++){
+//            insert(words[i]);
+//        }
+//        System.out.println("Words inserted successfully.");
+//         System.out.println(search("there"));
+//         System.out.println(search("thor"));
+//         System.out.println(search("an"));
+//
+//         String key = "theathere";
+//         System.out.println(wordBrake(key));
+//
+//         String prefix = "sr";
+//         System.out.println(startWith(prefix));
 
-         String key = "theathere";
-         System.out.println(wordBrake(key));
-
-         String prefix = "sr";
-         System.out.println(startWith(prefix));
+         String str = "apple";
+         for(int i = 0;i<str.length();i++){
+             String suffix = str.substring(i);
+             insert(suffix);
+         }
+          System.out.println(countNode(root));
   }
 
 }
